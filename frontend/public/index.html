@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>KitaHack Vibe Check</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 50px; background-color: #f8f9fa; }
+        .container { background: white; padding: 40px; border-radius: 12px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
+        button { padding: 12px 24px; font-size: 16px; cursor: pointer; background-color: #4285F4; color: white; border: none; border-radius: 6px; font-weight: bold; transition: 0.3s;}
+        button:hover { background-color: #3367d6; }
+        #result { margin-top: 30px; font-size: 20px; font-weight: bold; color: #34A853; min-height: 30px;}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>☁️ KitaHack 2026 ☁️</h1>
+        <p>Deploying AI Serverless Apps with Google Cloud</p>
+        <br>
+        <button onclick="getVibe()">Check The Vibe</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        async function getVibe() {
+            // THIS IS YOUR LIVE CLOUD RUN BACKEND URL
+            const backendUrl = "https://kitahack-api-1092235503411.us-central1.run.app/api/vibe";
+            
+            const resultDiv = document.getElementById("result");
+            resultDiv.innerText = "Loading AI response...";
+            resultDiv.style.color = "#FBBC05";
+
+            try {
+                const response = await fetch(backendUrl);
+                const data = await response.json();
+                resultDiv.innerText = data.message;
+                resultDiv.style.color = "#34A853";
+            } catch (error) {
+                resultDiv.innerText = "Error: Could not connect to the cloud.";
+                resultDiv.style.color = "#EA4335";
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
